@@ -8,7 +8,12 @@
             <h1>Телефон</h1>
         </div>
         <div class="content">
-
+            <h1>{{ phone.name }}</h1>
+            <img src="{{ phone.image }}" alt="{{ phone.name }}">
+            <p>Цена: {{ phone.price }}</p>
+            <p>Дата релиза: {{ phone.release_date }}</p>
+            <p>LTE присутствует: {{ phone.lte_exists }}</p>
+            <a href="{% url 'catalog' %}">Назад к каталогу</a>
         </div>
     </div>
 {% endblock %}

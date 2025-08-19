@@ -4,16 +4,23 @@
 {% block title %}Каталог{% endblock %}
 {% block content %}
     <div class="container">
-        <div class="header">
-            <h1><a href="/catalog">Каталог</a></h1>
-        </div>
+        <h1>Каталог телефонов</h1>
 
-        <div class="sort-block">
-            {# Здесь должен быть раздел с сортировкой #}
-        </div>
+    <form method="get" action="{% url 'catalog' %}">
+    <label for="sort">Сортировка:</label>
+    <select name="sort" id="sort" onchange="this.form.submit()">
+        <option value="name" {% if request.GET.sort == 'name' %}selected{% endif %}>Имя (A-Z)</option>
+        <option value="min_price" {% if request.GET.sort == 'min_price' %}selected{% endif %}>Цена (возр.)</option>
+        <option value="max_price" {% if request.GET.sort == 'max_price' %}selected{% endif %}>Цена (убыв.)</option>
+    </select>
+</form>
 
-        <div class="content">
-            {# Здесь должен отображаться каталог с телефонами #}
-        </div>
-    </div>
+<ul>
+  {% for p in phones %}
+    <li>
+      <a href="{% url 'product' slug=p.slug %}">{{ p.name }}</a> - {{ p.price }} -
+      <img src="{{ p.image }}" alt="{{ p.name }}" width="100">
+    </li>
+  {% endfor %}
+</ul>
 {% endblock %}
