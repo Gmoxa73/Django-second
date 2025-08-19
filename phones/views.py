@@ -13,7 +13,7 @@ def show_catalog(request):
     elif sort == 'max_price':
         phones = phones.order_by('-price')
     else:
-        # дефолтная сортировка (можно оставить без изменения)
+        # дефолтная сортировка
         phones = phones.order_by('name')
 
     context = {
@@ -26,3 +26,4 @@ def show_product(request, slug):
     phone = get_object_or_404(Phone, slug=slug)
     context = {'phone': phone}
     return render(request, 'product.html', context)
+
